@@ -32,9 +32,7 @@ lambdas=get_eigenvalue(PCA)
 lambdas
 ```
 
-Observamos que con tan solo la primera componente principal conseguimos explicar mas del 80% de la varianza, y si añadimos la segunda somos capaces de explicar más del 90%.
-
-Veámoslo de manera gráfica.
+Observamos que con tan solo la primera componente principal conseguimos explicar mas del 80% de la varianza, y si añadimos la segunda somos capaces de explicar más del 90%. Por lo tanto reducimos el problema a un problema en solo dos dimensiones.
 
 ```{r}
 fviz_eig(PCA, addlabels = TRUE, ylim=c(0,100))
@@ -72,6 +70,6 @@ fviz_pca_biplot(PCA, repel = TRUE,
 )
 ```
 
-Muchos de los países nórdicos como Noruega, Dinamarca, Holanda, Suecia o Bélgica se acumulan en el tercer cuadrante. Países de Europa central como Alemania Oriental y Occidental, Suiza, Luxemburgo o Checoslovaquia se encuentran el el segundo cuadrante. Varios países de Europa del Este se sitúan en el primer cuadrante, entre ellos: Bulgaria, Rumanía, Hungría, Polonia y Yugoslavia. En el cuarto cuadrante tenemos países como la Unión Soviética y Turquía (bastante ailsada del resto de los demás).
+Muchos de los países nórdicos como Noruega, Dinamarca, Holanda, Suecia o Bélgica se acumulan en el tercer cuadrante. Países de Europa central como Alemania Oriental y Occidental, Suiza, Luxemburgo o Checoslovaquia se encuentran el el segundo cuadrante. Varios países de Europa del Este se sitúan en el primer cuadrante, entre ellos: Bulgaria, Rumanía, Hungría, Polonia y Yugoslavia. En el cuarto cuadrante tenemos países como la Unión Soviética y Turquía (bastante ailsada del resto de los demás). Vemos que estos paises tendrán una mayor influencia del sector de la agricultura ya que es la única variable que está orientada hacia la derecha.
 
-También tenemos algunas excepciones como el caso de España y Portugal que parecen tener las características de un país de Europa del Este; El caso de Irlanda, que pese a estar cerca de Inglaterra (geográficamente hablando), parec tener una distribución de su fuerza de trabajo considerablemente distinta.
+También tenemos algunas excepciones como el caso de España y Portugal que parecen tener las características de un país de Europa del Este; El caso de Irlanda, que pese a estar cerca de Inglaterra (geográficamente hablando), parece tener una distribución de su fuerza de trabajo considerablemente distinta.
