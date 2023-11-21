@@ -1,0 +1,77 @@
+---
+title: "Ejercicio_europa"
+format: html
+editor: visual
+---
+
+## Análisis de Componentes principales
+
+Leemos los datos
+
+```{r}
+datos=read.table('europa.dat')
+
+```
+
+Hacemos el análisis de componentes principales con la función 'prcomp', que por defecto utiliza la matriz de covarianza.
+
+```{r}
+PCA=prcomp(datos)
+library(ggplot2)
+library(factoextra)
+
+```
+
+Vemos los valores propios y el porcentaje de varianza explicada por cada componente principal.
+
+```         
+```
+
+```{r}
+lambdas=get_eigenvalue(PCA)
+lambdas
+```
+
+Observamos que con tan solo la primera componente principal conseguimos explicar mas del 80% de la varianza, y si añadimos la segunda somos capaces de explicar más del 90%.
+
+Veámoslo de manera gráfica.
+
+```{r}
+fviz_eig(PCA, addlabels = TRUE, ylim=c(0,100))
+```
+
+El siguiente gráfico muestra las relaciones entre todas las variables, vemos que la agricultura está correlacionada negativamente con muchas de las variables y es la que más varianza tiene. Fábricas y servicios sociales personales también tienen bastante varianza aunque no parece que estén muy correlacionados negativamente.
+
+```{r}
+fviz_pca_var(PCA, col.var = "contrib",
+             repel = TRUE) 
+```
+
+A contiuación vemos que la variable mejor representada por las dos primeras componentes principales es la agricultura con diferencia.
+
+```{r}
+var <- get_pca_var(PCA)
+fviz_cos2(PCA, choice = "var", axes = 1:2)
+
+```
+
+Veamos los pesos de cada variable en cada componente principal.
+
+```{r}
+PCA$rotation
+```
+
+Observamos que la agricultura tiene un peso muy alto en la primera componente pero bajo en la segunda. También vemos que la suma de pesos Fábricas y Servicios Sociales Personales de las dos primeras componentes és relativamente alta con respecto al resto de variables.
+
+Finalmente vemos una representación de los datos en dos dimensiones ( cogiendo solo la primera y segunda componente).
+
+```{r}
+fviz_pca_biplot(PCA, repel = TRUE,
+                col.var = "#2E9FDF", # color para las variables
+                col.ind = "#696969"  # color para las observaciones
+)
+```
+
+Muchos de los países nórdicos como Noruega, Dinamarca, Holanda, Suecia o Bélgica se acumulan en el tercer cuadrante. Países de Europa central como Alemania Oriental y Occidental, Suiza, Luxemburgo o Checoslovaquia se encuentran el el segundo cuadrante. Varios países de Europa del Este se sitúan en el primer cuadrante, entre ellos: Bulgaria, Rumanía, Hungría, Polonia y Yugoslavia. En el cuarto cuadrante tenemos países como la Unión Soviética y Turquía (bastante ailsada del resto de los demás).
+
+También tenemos algunas excepciones como el caso de España y Portugal que parecen tener las características de un país de Europa del Este; El caso de Irlanda, que pese a estar cerca de Inglaterra (geográficamente hablando), parec tener una distribución de su fuerza de trabajo considerablemente distinta.
